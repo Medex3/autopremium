@@ -7,7 +7,7 @@ if allowed_hosts_env:
     ALLOWED_HOSTS = allowed_hosts_env.split(',')
 else:
     ALLOWED_HOSTS = [
-        'autopremium.onrender.com',
+        'autosalon.onrender.com',
         'localhost',
         '127.0.0.1',
     ]
