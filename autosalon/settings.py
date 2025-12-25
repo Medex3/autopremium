@@ -1,13 +1,16 @@
 import os
 from pathlib import Path
 
-# Настройка ALLOWED_HOSTS
-ALLOWED_HOSTS = [
-    'autopremium.onrender.com',  # Ваш домен на Render
-    'localhost',                 # Для локальной разработки
-    '127.0.0.1',                # Для локальной разработки
-    # Если у вас есть другие домены, добавьте их сюда
-]
+# Получаем ALLOWED_HOSTS из переменной окружения, или используем значение по умолчанию
+allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
+if allowed_hosts_env:
+    ALLOWED_HOSTS = allowed_hosts_env.split(',')
+else:
+    ALLOWED_HOSTS = [
+        'autopremium.onrender.com',
+        'localhost',
+        '127.0.0.1',
+    ]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
