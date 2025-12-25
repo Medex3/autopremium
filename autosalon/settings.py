@@ -1,12 +1,6 @@
 import os
 from pathlib import Path
 
-ALLOWED_HOSTS = [
-    'autopremium.onrender.com',  # Это ОБЯЗАТЕЛЬНО
-    'localhost',
-    '127.0.0.1',
-]
-
 # Получаем ALLOWED_HOSTS из переменной окружения, или используем значение по умолчанию
 allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
 if allowed_hosts_env:
