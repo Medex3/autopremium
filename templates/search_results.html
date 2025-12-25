@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Результаты поиска - AutoPremium{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="search-results">
+        <h1>Результаты поиска</h1>
+        
+        <div class="search-query">
+            <form action="{% url 'search' %}" method="get" class="search-form-large">
+                <input type="text" name="q" value="{{ query }}" placeholder="Введите запрос...">
+                <button type="submit">Найти</button>
+            </form>
+            
+            {% if query %}
+            <p class="search-info">По запросу "{{ query }}" найдено:</p>
+            {% endif %}
+        </div>
+        
+        {% if query %}
+            {% if has_results %}
+                <!-- Автомобили -->
+                {% if cars %}
+                <section class="search-section">
+                    <h2>Автомобили ({{ cars|length }})</h2>
+                    <div class="results-grid">
+                        {% for car in cars %}
+                        <div class="result-card">
+                            <h3>
+                                <a href="{% url 'car_detail' car.id %}">
+                                    {{ car.brand }} {{ car.model }} ({{ car.year }})
+                                </a>
+                            </h3>
+                            <p class="result-price">{{ car.price|floatformat:0 }} ₽</p>
+                            <p class="result-description">{{ car.description|truncatechars:150 }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+                
+                <!-- Новости -->
+                {% if news %}
+                <section class="search-section">
+                    <h2>Новости ({{ news|length }})</h2>
+                    <div class="results-grid">
+                        {% for item in news %}
+                        <div class="result-card">
+                            <h3>
+                                <a href="{% url 'news_detail' item.slug %}">
+                                    {{ item.title }}
+                                </a>
+                            </h3>
+                            <p class="result-date">{{ item.created_at|date:"d.m.Y" }}</p>
+                            <p class="result-description">{{ item.excerpt|truncatechars:150 }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+                
+                <!-- Страницы -->
+                {% if pages %}
+                <section class="search-section">
+                    <h2>Страницы ({{ pages|length }})</h2>
+                    <div class="results-grid">
+                        {% for page in pages %}
+                        <div class="result-card">
+                            <h3>
+                                <a href="{% url 'page_detail' page.slug %}">
+                                    {{ page.title }}
+                                </a>
+                            </h3>
+                            <p class="result-description">{{ page.content|striptags|truncatechars:200 }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+                
+            {% else %}
+                <div class="no-results">
+                    <h3>Ничего не найдено</h3>
+                    <p>Попробуйте изменить запрос или искать по другим словам.</p>
+                    <div class="search-tips">
+                        <h4>Советы по поиску:</h4>
+                        <ul>
+                            <li>Проверьте правильность написания</li>
+                            <li>Используйте более простые слова</li>
+                            <li>Попробуйте синонимы</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="no-query">
+                <h3>Введите поисковый запрос</h3>
+                <p>Введите слово или фразу в поле поиска выше.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

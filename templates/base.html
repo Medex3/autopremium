@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AutoPremium - Премиум автомобили{% endblock %}</title>
+
+    <!-- Стандартная тема -->
+    <link rel="stylesheet" href="/static/css/style.css" id="theme-style">
+
+    <!-- Шрифт для сайта автосалона -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Переключатель тем -->
+    <script>
+        function toggleTheme() {
+            const themeStyle = document.getElementById('theme-style');
+            const currentTheme = localStorage.getItem('theme') || 'standard';
+
+            if (currentTheme === 'standard') {
+                themeStyle.href = '/static/css/accessible.css';
+                localStorage.setItem('theme', 'accessible');
+                document.getElementById('theme-icon').textContent = '👁️';
+            } else {
+                themeStyle.href = '/static/css/style.css';
+                localStorage.setItem('theme', 'standard');
+                document.getElementById('theme-icon').textContent = '♿';
+            }
+        }
+
+        // Загрузка сохраненной темы
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            if (savedTheme === 'accessible') {
+                document.getElementById('theme-style').href = '/static/css/accessible.css';
+                themeIcon.textContent = '👁️';
+            } else {
+                themeIcon.textContent = '♿';
+            }
+        });
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Auto<span>Premium</span></h1>
+                    <p class="tagline">Премиум автомобили</p>
+                </div>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/cars/">Каталог автомобилей</a></li>
+
+                        <li><a href="/contacts/">Контакты</a></li>
+                        <li><a href="/sitemap/">Карта сайта</a></li>
+                    </ul>
+            </nav>
+
+                <div class="simple-search">
+                    <form action="{% url 'search' %}" method="get" class="search-form">
+                        <input type="text" name="q" placeholder="Поиск..." value="{{ request.GET.q }}">
+                        <button type="submit">Найти</button>
+                    </form>
+                </div>
+
+                <button onclick="toggleTheme()" class="theme-toggle" aria-label="Переключить тему для слабовидящих">
+                    <span id="theme-icon">♿</span> Версия для слабовидящих
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>AutoPremium</h3>
+                    <p>Продажа премиум автомобилей с 2010 года</p>
+                    <p>© 2024 Все права защищены</p>
+                </div>
+                <div class="footer-contacts">
+                    <p>📞 +7 (999) 123-45-67</p>
+                    <p>📍 Москва, Ленинградский проспект, 64</p>
+                    <p>✉️ info@autopremium.ru</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

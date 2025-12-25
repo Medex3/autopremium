@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Каталог автомобилей - AutoPremium{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Каталог автомобилей</h1>
+    
+    <!-- Фильтры по типу кузова -->
+    <div class="filters">
+        <h3>Фильтр по типу кузова:</h3>
+        <div class="filter-buttons">
+            <a href="?body_type=" class="filter-btn {% if not active_filter %}active{% endif %}">Все</a>
+            <a href="?body_type=sedan" class="filter-btn {% if active_filter == 'sedan' %}active{% endif %}">Седаны</a>
+            <a href="?body_type=suv" class="filter-btn {% if active_filter == 'suv' %}active{% endif %}">Внедорожники</a>
+            <a href="?body_type=coupe" class="filter-btn {% if active_filter == 'coupe' %}active{% endif %}">Купе</a>
+            <a href="?body_type=hatchback" class="filter-btn {% if active_filter == 'hatchback' %}active{% endif %}">Хэтчбеки</a>
+        </div>
+    </div>
+    
+    {% if cars %}
+    <div class="cars-grid">
+        {% for car in cars %}
+        <div class="car-card">
+            <div class="car-image">
+                {% if car.image %}
+                <img src="{{ car.image.url }}" alt="{{ car.brand }} {{ car.model }}" loading="lazy">
+                {% else %}
+                <div class="no-image">Фото автомобиля</div>
+                {% endif %}
+                {% if car.is_available %}
+                <span class="availability available">В наличии</span>
+                {% else %}
+                <span class="availability not-available">Нет в наличии</span>
+                {% endif %}
+            </div>
+            
+            <div class="car-info">
+                <h3>{{ car.brand }} {{ car.model }}</h3>
+                <p class="car-year">{{ car.year }} год</p>
+                <p class="car-price">{{ car.price|floatformat:0 }} ₽</p>
+                
+                <div class="car-specs">
+                    <span class="spec">{{ car.body_type }}</span>
+                    <span class="spec">{{ car.engine_volume }} л</span>
+                    <span class="spec">{{ car.horsepower }} л.с.</span>
+                    <span class="spec">{{ car.color }}</span>
+                </div>
+                
+                <p class="car-description">{{ car.description|truncatechars:100 }}</p>
+                
+                <div class="car-actions">
+                    <a href="/car/{{ car.id }}/" class="btn-primary">Подробнее</a>
+                    <button class="btn-secondary" onclick="alert('Запрос на тест-драйв отправлен!')">Тест-драйв</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="pagination">
+        <p>Показано {{ cars|length }} автомобилей</p>
+    </div>
+    {% else %}
+    <div class="no-cars">
+        <h3>Автомобилей не найдено</h3>
+        <p>Попробуйте изменить параметры фильтра</p>
+        <a href="?body_type=" class="btn-primary">Показать все автомобили</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

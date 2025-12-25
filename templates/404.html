@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Страница не найдена - AutoPremium{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="error-page">
+        <div class="error-code">
+            <h1>404</h1>
+            <h2>Страница не найдена</h2>
+        </div>
+        
+        <div class="error-content">
+            <p>Извините, но запрашиваемая страница не существует или была перемещена.</p>
+            <p>Возможно, вы ввели неправильный адрес или страница была удалена.</p>
+
+            <div class="error-suggestions">
+                <h3>Что можно сделать:</h3>
+                <ul>
+                    <li>Проверьте правильность введенного адреса</li>
+                    <li>Вернитесь на <a href="/">главную страницу</a></li>
+                    <li>Воспользуйтесь <a href="/sitemap/">картой сайта</a></li>
+                    <li>Перейдите в <a href="/cars/">каталог автомобилей</a></li>
+                    <li>Свяжитесь с нами через <a href="/page/contacts/">страницу контактов</a></li>
+                </ul>
+            </div>
+
+            <div class="error-actions">
+                <a href="/" class="btn-primary">На главную</a>
+                <a href="/cars/" class="btn-secondary">В каталог</a>
+                <a href="/sitemap/" class="btn-secondary">Карта сайта</a>
+            </div>
+
+            <div class="search-box">
+                <h3>Поиск по сайту:</h3>
+                <form action="/search/" method="get" class="search-form">
+                    <input type="text" name="q" placeholder="Введите запрос..." class="search-input">
+                    <button type="submit" class="search-button">Найти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

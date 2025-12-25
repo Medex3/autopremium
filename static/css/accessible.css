@@ -1,0 +1,288 @@
+/* Тема для слабовидящих по ГОСТ Р 52872-2012 */
+:root {
+    /* Высококонтрастная цветовая схема */
+    --primary-color: #000000;      /* Черный */
+    --secondary-color: #0000FF;    /* Синий */
+    --accent-color: #FF0000;       /* Красный */
+    --dark-bg: #FFFFFF;            /* Белый фон */
+    --light-bg: #FFFFFF;           /* Белый фон */
+    --text-color: #000000;         /* Черный текст */
+    --text-light: #000000;         /* Черный текст */
+    --white: #FFFFFF;              /* Белый */
+    --border-color: #000000;       /* Черные границы */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;               /* Увеличенный шрифт */
+    line-height: 1.8;              /* Увеличенный межстрочный интервал */
+    color: var(--text-color);
+    background-color: var(--white) !important;
+    min-width: 320px;
+}
+
+.container {
+    max-width: 1000px;             /* Ограниченная ширина для удобства чтения */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Улучшенная навигация */
+.header {
+    background: var(--white) !important;
+    border: 3px solid var(--primary-color) !important;
+    padding: 1rem 0;
+}
+
+.logo h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--primary-color) !important;
+}
+
+.logo span {
+    color: var(--primary-color) !important;
+    text-decoration: underline;
+}
+
+.tagline {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Навигация для слабовидящих */
+.nav-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.nav-list a {
+    color: var(--primary-color) !important;
+    text-decoration: underline !important;
+    font-weight: bold !important;
+    font-size: 18px;
+    padding: 0.5rem;
+    border: 2px solid transparent;
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+    background-color: #FFFF00 !important;  /* Желтый фон при фокусе */
+    color: #000000 !important;
+    outline: 3px solid var(--accent-color) !important;
+    text-decoration: none !important;
+}
+
+/* Кнопка темы */
+.theme-toggle {
+    background: var(--primary-color) !important;
+    color: var(--white) !important;
+    border: 3px solid var(--primary-color) !important;
+    padding: 1rem 2rem;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+    background: var(--white) !important;
+    color: var(--primary-color) !important;
+    outline: 3px solid var(--accent-color) !important;
+}
+
+/* Улучшенные заголовки */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color) !important;
+    font-weight: bold !important;
+    line-height: 1.5;
+    margin: 1.5rem 0 1rem 0;
+    border-bottom: 3px solid var(--primary-color) !important;
+    padding-bottom: 0.5rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.8rem; }
+h4 { font-size: 1.5rem; }
+
+/* Улучшенные ссылки */
+a {
+    color: var(--secondary-color) !important;
+    text-decoration: underline !important;
+    font-weight: bold !important;
+}
+
+a:hover,
+a:focus {
+    background-color: #FFFF00 !important;
+    color: #000000 !important;
+    outline: 3px solid var(--accent-color) !important;
+    text-decoration: none !important;
+}
+
+/* Карточки с четкими границами */
+.feature-card, .car-card {
+    background: var(--white) !important;
+    border: 3px solid var(--primary-color) !important;
+    margin: 1.5rem 0;
+    padding: 2rem;
+}
+
+.feature-card h4, .car-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.car-price {
+    font-size: 1.8rem !important;
+    font-weight: bold;
+    color: var(--accent-color) !important;
+}
+
+/* Кнопки */
+.btn-primary, .btn-secondary {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    border: 3px solid var(--primary-color) !important;
+    text-decoration: none !important;
+}
+
+.btn-primary {
+    background: var(--primary-color) !important;
+    color: var(--white) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--white) !important;
+    color: var(--primary-color) !important;
+}
+
+.btn-secondary {
+    background: var(--white) !important;
+    color: var(--primary-color) !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background: var(--primary-color) !important;
+    color: var(--white) !important;
+}
+
+/* Футер */
+.footer {
+    background: var(--white) !important;
+    border-top: 3px solid var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+.footer h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+/* Формы (если будут) */
+input, textarea, select, button {
+    font-size: 18px !important;
+    border: 2px solid var(--primary-color) !important;
+    padding: 10px !important;
+    background: var(--white) !important;
+    color: var(--primary-color) !important;
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+    outline: 3px solid var(--accent-color) !important;
+    outline-offset: 2px;
+}
+
+/* Карта сайта */
+.sitemap-list {
+    font-size: 20px;
+    line-height: 2;
+}
+
+.sitemap-list li {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Страница 404 */
+.error-page h1 {
+    font-size: 5rem;
+    color: var(--accent-color) !important;
+    margin-bottom: 2rem;
+}
+
+/* Увеличенные отступы */
+.main {
+    padding: 2rem 0;
+}
+
+/* Убрать градиенты и тени */
+.hero-section {
+    background: var(--white) !important;
+    color: var(--primary-color) !important;
+    border: 3px solid var(--primary-color) !important;
+}
+
+/* Улучшенная видимость для скринридеров */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Увеличенные иконки */
+.feature-icon {
+    font-size: 3rem;
+}
+
+/* Адаптивность для слабовидящих */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+}
+
+/* Подсветка текущей страницы */
+.nav-list a[aria-current="page"] {
+    background-color: #FFFF00 !important;
+    color: #000000 !important;
+    font-weight: bold;
+}
+
+/* Увеличенные области клика */
+button, a, input[type="submit"], input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+}

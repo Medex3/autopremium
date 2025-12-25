@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ car.brand }} {{ car.model }} - AutoPremium{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="breadcrumbs">
+        <a href="/">Главная</a> &gt; 
+        <a href="/cars/">Каталог</a> &gt; 
+        <span>{{ car.brand }} {{ car.model }}</span>
+    </div>
+    
+    <div class="car-detail">
+        <div class="car-detail-images">
+            <div class="main-image">
+                {% if car.image %}
+                <img src="{{ car.image.url }}" alt="{{ car.brand }} {{ car.model }}">
+                {% else %}
+                <div class="no-image-detail">Фото автомобиля</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="car-detail-info">
+            <h1>{{ car.brand }} {{ car.model }}</h1>
+            <p class="car-detail-year">{{ car.year }} год выпуска</p>
+            
+            <div class="price-section">
+                <h2 class="price">{{ car.price|floatformat:0 }} ₽</h2>
+                {% if car.is_available %}
+                <span class="availability available">В наличии</span>
+                {% else %}
+                <span class="availability not-available">Под заказ</span>
+                {% endif %}
+            </div>
+            
+            <div class="specifications">
+                <h3>Характеристики</h3>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Тип кузова:</span>
+                        <span class="spec-value">{{ car.get_body_type_display }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Объем двигателя:</span>
+                        <span class="spec-value">{{ car.engine_volume }} л</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Мощность:</span>
+                        <span class="spec-value">{{ car.horsepower }} л.с.</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Цвет:</span>
+                        <span class="spec-value">{{ car.color }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="description">
+                <h3>Описание</h3>
+                <p>{{ car.description|linebreaks }}</p>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Контакты для покупки</h3>
+                <p>📞 +7 (999) 123-45-67</p>
+                <p>📍 Москва, Ленинградский проспект, 64</p>
+                <p>🕒 Ежедневно с 9:00 до 21:00</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="back-to-catalog">
+        <a href="/cars/" class="btn-secondary">&larr; Вернуться в каталог</a>
+    </div>
+</div>
+{% endblock %}

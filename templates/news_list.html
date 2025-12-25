@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Новости - AutoPremium{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="news-header">
+        <h1>Новости автосалона</h1>
+        <p class="news-subtitle">Акции, события и обновления от AutoPremium</p>
+    </div>
+    
+    {% if news_list %}
+    <div class="news-grid">
+        {% for news in news_list %}
+        <article class="news-card">
+            <div class="news-image">
+                {% if news.image %}
+                <img src="{{ news.image.url }}" alt="{{ news.title }}" loading="lazy">
+                {% else %}
+                <div class="no-news-image">AutoPremium</div>
+                {% endif %}
+                <div class="news-date">
+                    <span class="day">{{ news.created_at|date:"d" }}</span>
+                    <span class="month">{{ news.created_at|date:"M" }}</span>
+                </div>
+            </div>
+            
+            <div class="news-content">
+                <h2 class="news-title">
+                    <a href="{% url 'news_detail' news.slug %}">{{ news.title }}</a>
+                </h2>
+                
+                <p class="news-excerpt">{{ news.excerpt }}</p>
+                
+                <div class="news-meta">
+                    <span class="meta-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        {{ news.created_at|date:"d.m.Y" }}
+                    </span>
+                    <span class="meta-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        {{ news.views }} просмотров
+                    </span>
+                </div>
+                
+                <a href="{% url 'news_detail' news.slug %}" class="read-more">Читать далее →</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    
+    <!-- Пагинация -->
+    {% if is_paginated %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-link">← Назад</a>
+        {% endif %}
+        
+        <span class="current-page">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+        </span>
+        
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="page-link">Вперед →</a>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+    {% else %}
+    <div class="no-news">
+        <h3>Новостей пока нет</h3>
+        <p>Скоро здесь появятся свежие новости и акции нашего автосалона.</p>
+        <a href="/" class="btn-primary">Вернуться на главную</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

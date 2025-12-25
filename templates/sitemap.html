@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Карта сайта - AutoPremium{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="sitemap-page">
+        <h1>Карта сайта</h1>
+        <p>На этой странице представлена структура нашего сайта для удобной навигации.</p>
+        
+        <section class="sitemap-section">
+            <h2>Основные разделы</h2>
+            <ul class="sitemap-list">
+                <li><a href="/">Главная страница</a> - информация об автосалоне, новинки, преимущества</li>
+                <li><a href="/cars/">Каталог автомобилей</a> - полный список доступных автомобилей</li>
+                <li><a href="/page/about/">О компании</a> - информация об автосалоне AutoPremium</li>
+                <li><a href="/page/contacts/">Контакты</a> - как с нами связаться</li>
+            </ul>
+        </section>
+        
+        <section class="sitemap-section">
+            <h2>Специальные страницы</h2>
+            <ul class="sitemap-list">
+                <li><a href="/sitemap/">Карта сайта</a> - текущая страница</li>
+                <li><a href="#" onclick="toggleTheme()">Версия для слабовидящих</a> - переключение темы оформления</li>
+            </ul>
+        </section>
+        
+        <section class="sitemap-section">
+            <h2>Автомобили по категориям</h2>
+            <ul class="sitemap-list">
+                <li><strong>Седаны</strong> - бизнес-класс и премиум седаны</li>
+                <li><strong>Внедорожники</strong> - SUV и кроссоверы</li>
+                <li><strong>Купе</strong> - спортивные автомобили</li>
+                <li><strong>Хэтчбеки</strong> - компактные городские автомобили</li>
+            </ul>
+        </section>
+        
+        <div class="sitemap-info">
+            <h3>Поиск по сайту</h3>
+            <p>Если вы не нашли нужную информацию, воспользуйтесь навигацией вверху страницы или свяжитесь с нами.</p>
+        </div>
+    </div>
+</div>
+
+<section class="sitemap-section">
+    <h2>Новости</h2>
+    <ul class="sitemap-list">
+        <li><a href="/news/">Все новости</a> - последние события и акции</li>
+        {% for news in news_list|slice:":5" %}
+        <li><a href="/news/{{ news.slug }}/">{{ news.title }}</a></li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

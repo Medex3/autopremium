@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - AutoPremium{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h2>Премиальные автомобили <span>для вас</span></h2>
+            <p>Более 100 автомобилей премиум-класса в наличии</p>
+            <a href="/cars/" class="btn-primary">Смотреть каталог</a>
+        </div>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <h3>Почему выбирают нас</h3>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚗</div>
+                <h4>Большой выбор</h4>
+                <p>Автомобили от ведущих мировых производителей</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h4>Гарантия качества</h4>
+                <p>Все автомобили проходят предпродажную подготовку</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h4>Сервис</h4>
+                <p>Профессиональное обслуживание и поддержка</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="new-arrivals">
+    <div class="container">
+        <h3>Новые поступления</h3>
+        <div class="cars-grid">
+            {% for car in new_cars %}
+            <div class="car-card">
+                <div class="car-image">
+                    {% if car.image %}
+                    <img src="{{ car.image.url }}" alt="{{ car.brand }} {{ car.model }}">
+                    {% else %}
+                    <div class="no-image">Фото автомобиля</div>
+                    {% endif %}
+                    {% if car.is_available %}
+                    <span class="availability available">В наличии</span>
+                    {% else %}
+                    <span class="availability not-available">Нет в наличии</span>
+                    {% endif %}
+                </div>
+                <div class="car-info">
+                    <h4>{{ car.brand }} {{ car.model }}</h4>
+                    <p class="car-year">{{ car.year }} год</p>
+                    <p class="car-price">{{ car.price|floatformat:0 }} ₽</p>
+                    <a href="/car/{{ car.id }}/" class="btn-primary">Подробнее</a>
+                </div>
+            </div>
+            {% empty %}
+            <p>Автомобилей пока нет.</p>
+            {% endfor %}
+        </div>
+        {% if new_cars %}
+        <div class="view-all">
+            <a href="/cars/" class="btn-secondary">Смотреть все автомобили →</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="latest-news">
+    <div class="container">
+        <div class="section-header">
+            <h2>Последние новости</h2>
+            <a href="{% url 'news_list' %}" class="view-all">Все новости →</a>
+        </div>
+
+        <div class="news-preview-grid">
+            {% for news in latest_news %}
+            <article class="news-preview-card">
+                {% if news.image %}
+                <div class="news-preview-image">
+                    <img src="{{ news.image.url }}" alt="{{ news.title }}" loading="lazy">
+                </div>
+                {% endif %}
+
+                <div class="news-preview-content">
+                    <span class="news-preview-date">{{ news.created_at|date:"d.m.Y" }}</span>
+                    <h3 class="news-preview-title">
+                        <a href="{% url 'news_detail' news.slug %}">{{ news.title }}</a>
+                    </h3>
+                    <p class="news-preview-excerpt">{{ news.excerpt|truncatechars:120 }}</p>
+                    <a href="{% url 'news_detail' news.slug %}" class="read-more">Подробнее →</a>
+                </div>
+            </article>
+            {% empty %}
+            <p class="no-news-preview">Свежих новостей пока нет. Следите за обновлениями!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

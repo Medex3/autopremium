@@ -1,0 +1,32 @@
+<!-- Этот блок можно вставить в templates/home.html -->
+<section class="latest-news">
+    <div class="container">
+        <div class="section-header">
+            <h2>Последние новости</h2>
+            <a href="{% url 'news_list' %}" class="view-all">Все новости →</a>
+        </div>
+
+        <div class="news-preview-grid">
+            {% for news in latest_news %}
+            <article class="news-preview-card">
+                {% if news.image %}
+                <div class="news-preview-image">
+                    <img src="{{ news.image.url }}" alt="{{ news.title }}" loading="lazy">
+                </div>
+                {% endif %}
+
+                <div class="news-preview-content">
+                    <span class="news-preview-date">{{ news.created_at|date:"d.m.Y" }}</span>
+                    <h3 class="news-preview-title">
+                        <a href="{% url 'news_detail' news.slug %}">{{ news.title }}</a>
+                    </h3>
+                    <p class="news-preview-excerpt">{{ news.excerpt|truncatechars:120 }}</p>
+                    <a href="{% url 'news_detail' news.slug %}" class="read-more">Подробнее →</a>
+                </div>
+            </article>
+            {% empty %}
+            <p class="no-news-preview">Свежих новостей пока нет. Следите за обновлениями!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
