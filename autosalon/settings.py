@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import dj_database_url
 
 # Получаем ALLOWED_HOSTS из переменной окружения, или используем значение по умолчанию
 allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
@@ -73,7 +74,7 @@ WSGI_APPLICATION = 'autosalon.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),  # Render сам подставляет URL
+        default=os.environ.get('DATABASE_URL'),
         conn_max_age=600
     )
 }
