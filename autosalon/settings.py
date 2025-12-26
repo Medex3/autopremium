@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'autosalon.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
+        default='postgresql://user:pass@localhost/dbname', 
         conn_max_age=600
     )
 }
