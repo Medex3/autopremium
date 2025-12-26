@@ -11,5 +11,6 @@ setuptools==80.9.0
 sqlparse==0.5.4
 tzdata==2025.2
 wheel==0.45.1
+dj-database-url==2.0.0
 
 
