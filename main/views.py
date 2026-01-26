@@ -11,8 +11,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import transaction
-#from .forms import CustomUserCreationForm, LoginForm, ProfileForm
-#from .models import CustomUser
+from .models import Car, News, Page
 from django.urls import path
 from . import views
 
@@ -31,21 +30,25 @@ def home(request):
     })
 
 
+def home(request):
+    new_cars = Car.objects.filter(is_available=True).order_by('-id')[:6]
+    latest_news = News.objects.filter(is_published=True).order_by('-created_at')[:3]
+    
+    return render(request, 'home.html', {
+        'new_cars': new_cars,
+        'latest_news': latest_news,
+    })
+
 def cars_list(request):
-    Car = apps.get_model('main', 'Car')
-
-    # Получаем все доступные автомобили
     cars = Car.objects.filter(is_available=True)
-
-    # Фильтрация по типу кузова
+    
     body_type = request.GET.get('body_type')
     if body_type:
         cars = cars.filter(body_type=body_type)
-
-    # Получаем отображаемое название типа кузова для активного фильтра
+    
     active_filter = body_type if body_type else ''
     filter_display = dict(Car.BODY_TYPES).get(body_type, '') if body_type else ''
-
+    
     return render(request, 'cars.html', {
         'cars': cars,
         'active_filter': active_filter,
@@ -53,11 +56,8 @@ def cars_list(request):
         'body_types': Car.BODY_TYPES
     })
 
-
 def car_detail(request, car_id):
-    Car = apps.get_model('main', 'Car')
     car = get_object_or_404(Car, id=car_id)
-
     return render(request, 'car_detail.html', {'car': car})
 
 
