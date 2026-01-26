@@ -19,13 +19,15 @@ from . import views
 
 
 def home(request):
-    Car = apps.get_model('main', 'Car')
-
     # Берем 6 последних автомобилей для главной
     new_cars = Car.objects.filter(is_available=True).order_by('-id')[:6]
-
+    
+    # Берем 3 последние новости для главной
+    latest_news = News.objects.filter(is_published=True).order_by('-created_at')[:3]
+    
     return render(request, 'home.html', {
-        'new_cars': new_cars
+        'new_cars': new_cars,
+        'latest_news': latest_news,
     })
 
 
