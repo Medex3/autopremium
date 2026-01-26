@@ -11,22 +11,23 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import transaction
-from .models import Car, News, Page
+#from .forms import CustomUserCreationForm, LoginForm, ProfileForm
+#from .models import CustomUser
 from django.urls import path
 from . import views
 
 
+
 def home(request):
+    Car = apps.get_model('main', 'Car')
+
     # Берем 6 последних автомобилей для главной
     new_cars = Car.objects.filter(is_available=True).order_by('-id')[:6]
 
-    # Берем 3 последние новости для главной
-    latest_news = News.objects.filter(is_published=True).order_by('-created_at')[:3]
-
     return render(request, 'home.html', {
-        'new_cars': new_cars,
-        'latest_news': latest_news,
+        'new_cars': new_cars
     })
+
 
 def cars_list(request):
     Car = apps.get_model('main', 'Car')
