@@ -1,17 +1,6 @@
 import os
 from pathlib import Path
 
-# Получаем ALLOWED_HOSTS из переменной окружения, или используем значение по умолчанию
-allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
-if allowed_hosts_env:
-    ALLOWED_HOSTS = allowed_hosts_env.split(',')
-else:
-    ALLOWED_HOSTS = [
-        'autosalon.onrender.com',
-        'localhost',
-        '127.0.0.1',
-    ]
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,10 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!(*7gi+_1m)z2k2s1+@!tabj%imwf9zlqe)kh!0_dw1vi)xlll'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
