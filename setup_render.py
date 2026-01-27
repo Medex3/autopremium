@@ -19,7 +19,7 @@ print("=" * 50)
 print("\n1. Настройка администратора...")
 try:
     user = User.objects.get(username='admin')
-    user.set_password('Auto2024!')
+    user.set_password('1111')
     user.is_staff = True
     user.is_superuser = True
     user.is_active = True
@@ -29,12 +29,12 @@ except User.DoesNotExist:
     User.objects.create_superuser(
         username='admin',
         email='admin@autopremium.com',
-        password='Auto2024!'
+        password='1111'
     )
     print("✅ Администратор создан")
 
 print(f"   Логин: admin")
-print(f"   Пароль: Auto2024!")
+print(f"   Пароль: 1111")
 
 # 2. ДОБАВЛЕНИЕ АВТОМОБИЛЕЙ
 print("\n2. Добавление автомобилей...")
