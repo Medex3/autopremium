@@ -51,8 +51,12 @@ news_data = [
 ]
 
 for news_item in news_data:
+    from django.utils.text import slugify
+
+    news_item['slug'] = slugify(news_item['title'])
+
     News.objects.get_or_create(
-        title=news_item['title'],
+        slug=news_item['slug'],
         defaults=news_item
     )
     print(f"✅ Добавлена новость: {news_item['title']}")
