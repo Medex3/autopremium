@@ -11,7 +11,7 @@ User = get_user_model()
 # Создаём или обновляем администратора
 try:
     user = User.objects.get(username='admin')
-    user.set_password('Auto2024!')  # НОВЫЙ ПАРОЛЬ
+    user.set_password('1111')  # НОВЫЙ ПАРОЛЬ
     user.is_staff = True
     user.is_superuser = True
     user.is_active = True
@@ -21,12 +21,12 @@ except User.DoesNotExist:
     User.objects.create_superuser(
         username='admin',
         email='admin@autopremium.com',
-        password='Auto2024!'  # НОВЫЙ ПАРОЛЬ
+        password='1111'  # НОВЫЙ ПАРОЛЬ
     )
     print("✅ Администратор создан")
 
 print("=== ДАННЫЕ ДЛЯ ВХОДА ===")
 print("Сайт: https://autopremium.onrender.com/admin/")
 print("Логин: admin")
-print("Пароль: Auto2024!")
+print("Пароль: 1111")
 print("=======================")
